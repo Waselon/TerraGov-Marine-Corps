@@ -338,6 +338,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 /datum/supply_ui/ui_data(mob/living/user)
 	. = list()
 	.["currentpoints"] = round(SSpoints.supply_points[user.faction])
+	.["personalpoints"] = round(SSpoints.personal_supply_points[user.ckey])
 	.["requests"] = list()
 	for(var/key in SSpoints.requestlist)
 		var/datum/supply_order/SO = SSpoints.requestlist[key]
@@ -514,6 +515,9 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 		if("buycart")
 			SSpoints.buy_cart(ui.user)
 			. = TRUE
+		if("buypersonal")
+			SSpoints.buy_using_psp(ui.user)
+			. = TRUE
 		if("clearcart")
 			var/list/shopping_cart = get_shopping_cart(ui.user)
 			shopping_cart.Cut()
@@ -532,6 +536,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 /datum/supply_ui/requests/ui_data(mob/living/user)
 	. = list()
 	.["currentpoints"] = round(SSpoints.supply_points[user.faction])
+	.["personalpoints"] = round(SSpoints.personal_supply_points[user.ckey])
 	.["requests"] = list()
 	for(var/i in SSpoints.requestlist)
 		var/datum/supply_order/SO = SSpoints.requestlist[i]
@@ -586,6 +591,9 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 	switch(action)
 		if("submitrequest")
 			SSpoints.submit_request(ui.user, params["reason"])
+			. = TRUE
+		if("buypersonal")
+			SSpoints.buy_using_psp(ui.user)
 			. = TRUE
 
 /datum/supply_ui/requests/get_shopping_cart(mob/user)
