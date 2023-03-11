@@ -45,7 +45,7 @@
 
 //dartgun skill
 //increase or decrase accuracy and scatter.
-#define SKILL_DARTGUN_DEFAULT -1
+#define SKILL_DARTGUN_DEFAULT -5
 #define SKILL_DARTGUN_TRAINED 0
 #define SKILL_DARTGUN_MASTER 2
 
